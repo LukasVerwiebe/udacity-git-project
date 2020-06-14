@@ -28,7 +28,7 @@ def input_checking(str_input, dtype_input):
             print("Input is not correct!")
     return read_input
 
-
+# Seting filters
 def get_filters():
 
     """
@@ -171,7 +171,7 @@ def user_stats(df,city):
 
     print("\nThis took %s seconds." % (time.time() - start_time))
     print('-'*40)
-    
+
 # Display Raw Data
 def display_data(city):
     a = 0
