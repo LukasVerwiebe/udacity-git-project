@@ -30,7 +30,7 @@ def input_checking(str_input, dtype_input):
 
 
 def get_filters():
-    
+
     """
     Returns:
         (str) city - name of the city to analyze
@@ -39,16 +39,16 @@ def get_filters():
     """
     print('Hello! Let\'s explore some US bikeshare data!')
     # Asks user to specify a city, month, and day to analyze.
-    
+
      # TO DO: get user input for city (chicago, new york city, washington). HINT: Use a while loop to handle invalid
     city = input_checking("Specify a city: chicago, new york city or washington: ",1)
-    
+
      # TO DO: get user input for month (all, january, february, ... , june)
     month = input_checking("Specify a month: ",2)
-    
+
     # TO DO: get user input for day of week (all, monday, tuesday, ... sunday)
     day = input_checking("Specify a day: ",3)
-    
+
     print('-'*40)
     return city, month, day
 
@@ -66,20 +66,20 @@ def load_data(city, month, day):
     """
     df = pd.read_csv(CITY_DATA[city])
     df['Start Time'] = pd.to_datetime(df['Start Time'])
-    
+
     df['month'] = df['Start Time'].dt.month
     df['day_of_week'] = df['Start Time'].dt.weekday_name
     df['hour'] = df['Start Time'].dt.hour
-    
+
     if month != 'all':
         months = ['january', 'february', 'march', 'april', 'may', 'june']
         month = months.index(month) + 1
 
         df = df[df['month'] == month]
-   
+
     if day != 'all':
         df = df[df['day_of_week'] == day.title()]
-   
+
     return df
 
 
@@ -97,11 +97,11 @@ def time_stats(df):
     popular_day_of_week = df["day_of_week"].mode()[0]
     print("Most day of week:", popular_day_of_week)
 
-    
+
     # TO DO: display the most common start hour
     popular_common_start_hour = df["hour"].mode()[0]
     print("Most common start hour:", popular_common_start_hour)
-    
+
     print("\nThis took %s seconds." % (time.time() - start_time))
     print('-'*40)
 
@@ -124,7 +124,7 @@ def station_stats(df):
     group_field = df.groupby(['Start Station','End Station'])
     popular_combination_station = group_field.size().sort_values(ascending=False).head(1)
     print('Most frequent combination of Start Station and End Station trip:\n', popular_combination_station)
-    
+
     print("\nThis took %s seconds." % (time.time() - start_time))
     print('-'*40)
 
@@ -172,10 +172,10 @@ def user_stats(df,city):
     print("\nThis took %s seconds." % (time.time() - start_time))
     print('-'*40)
     
-
+# Display Raw Data
 def display_data(city):
     a = 0
-    b = 5    
+    b = 5
     while True:
         choice = input('\nDo you want to see raw Data: Enter yes or no.\n').lower()
         print('')
@@ -187,12 +187,12 @@ def display_data(city):
            a = a + 5
            b = b + 5
 
-            
+
 def main():
     while True:
         city, month, day = get_filters()
         df = load_data(city, month, day)
-        
+
         while True:
             print('1: time_stats, 2: station_stats, 3: trip_duration_stats, 4: user_stats, all: All Stats, stop: End of programm')
             choice = input('Wich Result want you to View: ').lower()
@@ -218,13 +218,13 @@ def main():
                 print('')
                 print('Wrong input!')
                 print('')
-        
+
             display_data(city)
             #print('test')
             #os = pd.read_csv('washington.csv')
-            #print(os.head(5)) 
-            
-        
+            #print(os.head(5))
+
+
         restart = input('\nWould you like to restart? Enter yes or no.\n')
         if restart.lower() != 'yes':
             break
